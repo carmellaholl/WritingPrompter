@@ -1,12 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Noto+Sans+Bhaiksuki&family=Roboto+Slab:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Noto+Sans+Bhaiksuki&family=Roboto+Slab:wght@100..900&display=swap");
 
 html,
 body {
   margin: 0;
   min-height: 100vh;
-  background: #C70039;
-    font-family: "Roboto Slab", serif;
+  /* background: #c70039; */
+    background: #23547b;
 
+  font-family: "Roboto Slab", serif;
 }
 
 body {
@@ -20,10 +21,10 @@ body {
 .main {
   width: 1300px;
   height: 600px;
-  border: 2px #FFC300 solid;
+  border: 2px #ffc300 solid;
   border-radius: 12px;
   text-align: center;
-  background: #FFC300;
+  background: #ffc300;
   position: absolute;
 
   display: flex;
@@ -43,24 +44,31 @@ body {
   width: 100%;
   height: 100%;
   word-spacing: 3px;
-  top:0;
-  left:0;
-  position:absolute;
+  top: 0;
+  left: 0;
+  position: absolute;
 }
 
 .start-button {
-  width: 200px;
-  height: 70px;
-  font-size: 32px;
+  width: 300px;
+  height: 130px;
+  font-size: 42px;
   align-self: center;
   margin-bottom: 40px;
   cursor: pointer;
   border-radius: 10px;
-  background: #F9E8B1;
+  background: #f9e8b1;
+  border: 1px solid #e5d398;
+  font-family: "Roboto Slab", serif;
+}
+
+.start-button:hover {
+  background: #e5d398;
+  cursor: pointer;
 }
 
 .selection {
-  font-size: 45px;
+  font-size: 50px;
   margin-top: 150px;
   margin-bottom: auto;
 }
@@ -71,9 +79,14 @@ body {
   font-size: 30px;
   text-align: center;
   border-radius: 2px;
-    background: #F9E8B1;
-    font-family: "Roboto Slab", serif;
+  border: none;
+  background: #f9e8b1;
+  font-family: "Roboto Slab", serif;
+}
 
+.selector:hover {
+  background: #e5d398;
+  cursor: pointer;
 }
 
 #rounds-select {
@@ -85,7 +98,7 @@ body {
 }
 
 .prompt {
-  align-self:baseline;
+  align-self: baseline;
   width: 100%;
   text-align: left;
   justify-self: center;
@@ -93,7 +106,7 @@ body {
   margin: 0;
   margin-top: 10px;
   padding-left: 20px;
-    padding-right: 5px;
+  padding-right: 5px;
 
   box-sizing: border-box;
   grid-column: 1;
@@ -101,34 +114,33 @@ body {
 
 .timer {
   align-self: center;
-  margin-top: -40px;
+  margin-top: -55px;
   grid-column: 1;
-      font-size: 30px;
-
+  font-size: 35px;
 }
 
 .input {
-  width: 865px;
+  width: 815px;
   height: 565px;
   border-radius: 10px;
-    font-size: 30px;
+  font-size: 30px;
   resize: none;
-box-sizing: border-box;
+  box-sizing: border-box;
   padding: 15px;
   grid-column: 2;
   grid-row: 1;
-  background-color: #F9E8B1;
-  border: 2px #F9E8B1 solid;
+  background-color: #f9e8b1;
+  border: 2px #f9e8b1 solid;
 }
 
 .game-column {
   display: grid;
-  grid-template-columns: 400px 900px;
+  grid-template-columns: 450px 1050px;
   gap: 16px;
   width: 100%;
   box-sizing: border-box;
-  left:0;
-    margin-left: 0;
-  top:15px;
-  position:absolute;
+  left: 0;
+  margin-left: 0;
+  top: 15px;
+  position: absolute;
 }
