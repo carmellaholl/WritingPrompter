@@ -1,0 +1,39 @@
+<!-- public/index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Node.js HTML Example</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="start" id="start-div">
+        <p class="selection">
+          Give me
+          <select class="selector" id="rounds-select">
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="8">8</option>
+          </select>
+
+          <select class="selector" id="genre-select">
+            <option>Horror</option>
+            <option>Romance</option>
+            <option>Sci-Fi</option>
+          </select>
+          prompts for
+          <select class="selector" id="time-select">
+            <option value="1">1 minute</option>
+            <option value="3">3 minute</option>
+            <option value="5">5 minutes</option>
+          </select>
+          each
+        </p>
+          <button class="start-button">Begin</button>
+      </div>
+    </div>
+      <script src="index.js"></script>
+
+  </body>
+</html>

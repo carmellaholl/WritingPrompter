@@ -1,0 +1,24 @@
+{
+  "name": "writingprompter",
+  "version": "1.0.0",
+  "description": "Randomly generates a writing prompt, then allowing the user a finite amount of time to complete it.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carmellaholl/WritingPrompter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/carmellaholl/WritingPrompter/issues"
+  },
+  "homepage": "https://github.com/carmellaholl/WritingPrompter#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
