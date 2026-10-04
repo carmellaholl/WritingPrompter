@@ -1,2 +1,4 @@
 # WritingPrompter
-Randomly generates a writing prompt, then allowing the user a finite amount of time to complete it.
+Timed random writing prompt generator with user input.
+
+Allows for the user to customize their writing experience by providing options for duration, genre, and rounds.

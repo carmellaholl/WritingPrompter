@@ -3,13 +3,28 @@ const btn = document.querySelector(".start-button");
 const start = document.querySelector(".start");
 let currGenre = document.getElementById("genre-select");
 const main = document.querySelector(".main");
-let rounds;
-console.log(rounds);
-let time; 
 let inputBox;
-let currentPrompt;
+let rounds;
+let time;
 let timeDisplay;
 let column;
+let inputMap = new Map();
+
+
+////////////////////////
+////////Current progress
+////////////// Have the responses page interaction functioning
+// inputMap resets every time "Begin is pressed
+
+// to do: create contents of Responses page
+//            should be able to go through inputMap and output all prompts and given responses
+//            ui undecided
+//        edge case tests
+//        add more prompts to horrorPrompts
+//        improve ui
+
+// note: each round is 1 second each for testing, move back to regular by changing line 83 back to time * 60
+
 
 const horrorPrompts = [
   "A family inherits a manor haunted by its former residents.",
@@ -35,13 +50,14 @@ const romancePrompts = [
   "Two people that know each other only from an online game meet for the first time.",
   "Two people have a secret relationship.",
 ];
-const scifiPrompts = [ "A scientist creates a race of genetically engineered beings with specific traits.",
+const scifiPrompts = [
+  "A scientist creates a race of genetically engineered beings with specific traits.",
   "An archaeological dig uncovers artifacts of an advanced alien race, leading to unintended consequences for humanity.",
   "An ordinary person inherits a mysterious alien artifact from a distant relative, leading them on an intergalactic quest.",
   "An alien race invades Earth, but their true intentions are not what they seem.",
   "A sentient artificial life form starts to question its existence and purpose.",
   "A group of scientists discovers evidence of powerful otherworldly beings living inside a black hole.",
-   "Astronauts wake up one day on their journey through space to see a group of stars coming toward them on their own.",
+  "Astronauts wake up one day on their journey through space to see a group of stars coming toward them on their own.",
   "An astronaut thinks they landed on a desolate planet before discovering ancient runes in a cliff wall.",
   "Four friends go to a local film festival and somehow become trapped inside one of the films",
   "Write about a society where people make clones of their loved ones before they die, ensuring no one has to experience permanent loss.",
@@ -58,20 +74,13 @@ function toggleStartScreen() {
   }
 }
 
-function togglePromptScreen() {
-  if (start.style.visibility == "hidden") {
-    start.style.visibility = "visible";
-  } else {
-    start.style.visibility = "hidden";
-  }
-}
-
 // counts down a given time
 function countDown(time) {
   console.log(time);
+  inputBox = document.querySelector(".input");
 
   return new Promise((resolve) => {
-    let timeLeft = time; //* 60;
+    let timeLeft = time * 60;
     updateTime(timeLeft); // show starting time immediately
 
     const downloadTimer = setInterval(function () {
@@ -79,6 +88,9 @@ function countDown(time) {
       updateTime(timeLeft);
 
       if (timeLeft <= 0) {
+        console.log(inputBox.value);
+
+        inputMap.set(recentPrompt, inputBox.value);
         clearInterval(downloadTimer);
         resolve();
       }
@@ -90,7 +102,11 @@ function updateTime(time) {
   timeDisplay.textContent = time.toString();
 }
 
+let recentPrompt;
+
 function getRandomPrompt(genre, promptEl) {
+  recentPrompt = "";
+
   let list;
   if (genre === "horror") list = horrorPrompts;
   else if (genre === "romance") list = romancePrompts;
@@ -99,14 +115,15 @@ function getRandomPrompt(genre, promptEl) {
   // Pick from unused prompts; reset if all used
   let available = list
     .map((_, i) => i)
-    .filter(i => !usedPromptInd.includes(`${genre}-${i}`));
+    .filter((i) => !usedPromptInd.includes(`${genre}-${i}`));
 
   if (available.length === 0) {
-    usedPromptInd = usedPromptInd.filter(k => !k.startsWith(`${genre}-`));
+    usedPromptInd = usedPromptInd.filter((k) => !k.startsWith(`${genre}-`));
     available = list.map((_, i) => i);
   }
 
   const idx = available[Math.floor(Math.random() * available.length)];
+  recentPrompt = list[idx];
   usedPromptInd.push(`${genre}-${idx}`);
   promptEl.textContent = list[idx];
 }
@@ -122,14 +139,32 @@ function buildColumn() {
   input.classList.add("input");
   column.classList.add("game-column");
 
-  input.maxLength = 999;
+  input.maxLength = 2000;
   input.placeholder = "Start typing here...";
 
   column.append(prompt, input, timer);
   return { column, prompt, timer };
 }
 
+function buildRecentResponses() {
+  const responsesDiv = document.createElement("div");
+  const prompt = document.createElement("p");
+
+  prompt.classList.add("prompt");
+  responsesDiv.classList.add("game-column");
+
+  prompt.textContent = inputMap;
+
+  responsesDiv.append(prompt);
+  return { column, prompt, timer };
+}
+
+const responsesBtn = document.getElementById("responses-btn");
+
+
 btn.addEventListener("click", async () => {
+      inputMap.clear();
+
   time = parseInt(document.getElementById("time-select").value); // moved down, was being set to default on load
   rounds = parseInt(document.getElementById("rounds-select").value);
   toggleStartScreen();
@@ -138,13 +173,23 @@ btn.addEventListener("click", async () => {
 
   for (let i = 0; i < rounds; i++) {
     const { column, prompt, timer } = buildColumn();
-    timeDisplay = timer;               // countDown writes to this
+    timeDisplay = timer; // countDown writes to this
     main.appendChild(column);
     getRandomPrompt(currGenre.value, prompt);
 
     await countDown(time);
     main.removeChild(column);
   }
+
+  // display "view recent responses" tab
+  buildRecentResponses();
+
+  toggleStartScreen();
+});
+
+
+
+responsesBtn.addEventListener("click", async () => {
 
   toggleStartScreen();
 });
