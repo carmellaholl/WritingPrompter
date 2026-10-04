@@ -28,10 +28,7 @@ const romancePrompts = [
   "Two opposites find themselves",
 ];
 const scifiPrompts = [
-  "write something scifi",
-  "write something scifi",
-  "write something scifi",
-  "write something scifi",
+    "write something sci fi",
 ];
 
 function toggleStartScreen() {
@@ -78,9 +75,9 @@ function updateTime(time) {
 function nextRound() {
     getRandomPrompt();
     main.appendChild(column);
-    main.appendChild(timeDisplay);
-    main.appendChild(currentPrompt);    
-    main.appendChild(inputBox);
+    // main.appendChild(timeDisplay);
+    // main.appendChild(currentPrompt);    
+    // main.appendChild(inputBox);
 
     // start timer
     countDown(time, () => {
@@ -104,13 +101,21 @@ btn.addEventListener("click", async () => {
   column = document.createElement("div");
   currentPrompt = document.createElement("p");
   timeDisplay = document.createElement("p");
-  inputBox = document.createElement("input");
+  inputBox = document.createElement("textarea");
 
   currentPrompt.classList.add("prompt");
   timeDisplay.classList.add("timer");
   inputBox.classList.add("input");
   column.classList.add("game-column");
-  column.appendChild(currentPrompt, timeDisplay, inputBox);
+
+  inputBox.maxLength = 999;
+  inputBox.placeholder = "Start typing here...";
+
+  column.appendChild(currentPrompt);
+  column.appendChild(inputBox);
+  column.appendChild(timeDisplay);
+ console.log(column);
+  console.log(main);
 
   currentRound = 0;
 
@@ -119,23 +124,20 @@ btn.addEventListener("click", async () => {
     nextRound();
     await countDown(time); // wait for this round's timer to finish
   }
-
-    main.removeChild(timeDisplay);
-    main.removeChild(currentPrompt);
-    main.removeChild(inputBox);
+  
     main.removeChild(column);
 
     toggleStartScreen();
 });
 
 function getRandomPrompt() {
-  if (currGenre.value == "Horror") {
+  if (currGenre.value == "horror") {
     currentPrompt.textContent =
       horrorPrompts[Math.floor(Math.random() * horrorPrompts.length)];
-  } else if (currGenre.value == "Romance") {
+  } else if (currGenre.value == "romance") {
     currentPrompt.textContent =
       romancePrompts[Math.floor(Math.random() * romancePrompts.length)];
-  } else if (currGenre.value == "Sci-Fi") {
+  } else if (currGenre.value == "sci-fi") {
     currentPrompt.textContent =
       scifiPrompts[Math.floor(Math.random() * scifiPrompts.length)];
   }

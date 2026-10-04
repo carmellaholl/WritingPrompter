@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Noto+Sans+Bhaiksuki&family=Roboto+Slab:wght@100..900&display=swap');
+
 html,
 body {
   margin: 0;
   min-height: 100vh;
-  background: #dce9fe;
+  background: #C70039;
+    font-family: "Roboto Slab", serif;
+
 }
 
 body {
@@ -12,13 +16,14 @@ body {
   align-items: center;
   overflow: hidden;
 }
+
 .main {
   width: 1300px;
   height: 600px;
-  border: 2px black solid;
+  border: 2px #FFC300 solid;
   border-radius: 12px;
   text-align: center;
-  background: rgb(241, 213, 146);
+  background: #FFC300;
   position: absolute;
 
   display: flex;
@@ -37,9 +42,10 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
-    word-spacing:3px;
-
-
+  word-spacing: 3px;
+  top:0;
+  left:0;
+  position:absolute;
 }
 
 .start-button {
@@ -50,28 +56,13 @@ body {
   margin-bottom: 40px;
   cursor: pointer;
   border-radius: 10px;
-  background: #fff;
-  
-}
-
-.prompt {
-  justify-self: center;
-    align-self: center;
-  font-size: 40px;
-  
-}
-
-.timer {
-  align-self: center;
-  margin-top: 0px;
-    grid-column: 2;
-
+  background: #F9E8B1;
 }
 
 .selection {
   font-size: 45px;
-  margin-top: 150px;   
-  margin-bottom: auto; 
+  margin-top: 150px;
+  margin-bottom: auto;
 }
 
 .selector {
@@ -80,38 +71,64 @@ body {
   font-size: 30px;
   text-align: center;
   border-radius: 2px;
+    background: #F9E8B1;
+    font-family: "Roboto Slab", serif;
+
 }
 
-#rounds-select{
-    width: 90px;
+#rounds-select {
+  width: 90px;
+}
+
+#time-select {
+  width: 90px;
 }
 
 .prompt {
-  align-self: flex-start;   
-  width: 100%;              
-  text-align: left;         
+  align-self:baseline;
+  width: 100%;
+  text-align: left;
+  justify-self: center;
   font-size: 40px;
   margin: 0;
-  padding-left: 24px;      
+  margin-top: 10px;
+  padding-left: 20px;
+    padding-right: 5px;
+
   box-sizing: border-box;
   grid-column: 1;
 }
 
+.timer {
+  align-self: center;
+  margin-top: -40px;
+  grid-column: 1;
+      font-size: 30px;
+
+}
+
 .input {
-  width: 700px;
-  height: 200px;
+  width: 865px;
+  height: 565px;
   border-radius: 10px;
+    font-size: 30px;
+  resize: none;
+box-sizing: border-box;
+  padding: 15px;
   grid-column: 2;
+  grid-row: 1;
+  background-color: #F9E8B1;
+  border: 2px #F9E8B1 solid;
 }
 
 .game-column {
   display: grid;
   grid-template-columns: 400px 900px;
-  /* grid-auto-rows: auto; */
-  /* gap: 16px; */
+  gap: 16px;
   width: 100%;
-  padding-left: 24px;
   box-sizing: border-box;
-  /* text-align: left; */
-  /* align-items: center;  */
+  left:0;
+    margin-left: 0;
+  top:15px;
+  position:absolute;
 }
