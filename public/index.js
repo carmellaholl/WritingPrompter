@@ -144,6 +144,7 @@ function buildColumn() {
 let responsesDiv = document.createElement("div");
 responsesDiv.classList.add("response-div");
 
+// spread operator
 const responseColomn = document.createElement("p");
 responseColomn.classList.add("response-colomn");
 function buildRecentResponses() {
@@ -153,6 +154,10 @@ function buildRecentResponses() {
   responsesDiv.id = "recent-responses";
   const heading = document.createElement("p");
   heading.textContent = "Recent responses";
+      responseColomn.appendChild(heading);
+
+    heading.classList.add("response-heading");
+
   responsesDiv.appendChild(heading);
 
   // Actually render the inputMap prompt contents

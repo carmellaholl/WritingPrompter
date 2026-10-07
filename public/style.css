@@ -178,26 +178,33 @@ body {
   height: 120px;
   border-radius: 10px;
   background: #f9e8b1;
-    padding-right: 12px;
 
   border: 1px solid #e5d398;
   font-family: "Roboto Slab", serif;
 }
 
 .response-colomn {
-    display: grid;
+  display: grid;
   grid-template-rows: repeat(4, 120px);
-  grid-template-columns:repeat(2, 220px);
-  
-line-height: 20px;
+  grid-template-columns: repeat(2, 220px);
+  column-gap: 10px;
+  row-gap: 10px;
+  padding-left: 12px;
+  padding-bottom: 12px;
 
-grid-auto-flow: column;
+  line-height: 20px;
+
+  grid-auto-flow: column;
   grid-column: 1;
 }
 
 .response-text {
   grid-auto-flow: column;
   grid-column: 2;
+}
+
+.response-heading {
+    height:15px;
 }
 
 .response-div {
@@ -208,6 +215,7 @@ grid-auto-flow: column;
   box-sizing: border-box;
   left: 0;
   margin-left: 0;
-  top: 15px;
+  
+  top: 0px;
   position: absolute;
 }
