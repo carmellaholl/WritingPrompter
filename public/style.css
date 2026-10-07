@@ -5,7 +5,7 @@ body {
   margin: 0;
   min-height: 100vh;
   /* background: #c70039; */
-    background: #4CAF50;
+  background: #4caf50;
 
   font-family: "Roboto Slab", serif;
 }
@@ -38,7 +38,7 @@ body {
 
 .start {
   display: flex;
-  flex-direction: column;   /* stack text above buttons */
+  flex-direction: column; /* stack text above buttons */
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -54,7 +54,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 40px;   /* space between the two buttons */
+  gap: 40px; /* space between the two buttons */
 }
 
 .start-button {
@@ -63,7 +63,7 @@ body {
   font-size: 42px;
   align-self: center;
   margin-bottom: 40px;
-   margin-right: 40px;
+  margin-right: 40px;
   cursor: pointer;
   border-radius: 10px;
   background: #f9e8b1;
@@ -94,12 +94,11 @@ body {
   cursor: pointer;
 }
 
-
 .selection {
   font-size: 50px;
   margin-top: 60px;
   margin-bottom: auto;
-line-height: 1.6;
+  line-height: 1.6;
 }
 
 .selector {
@@ -117,7 +116,6 @@ line-height: 1.6;
   background: #e5d398;
   cursor: pointer;
 }
-
 
 #rounds-select {
   width: 90px;
@@ -164,6 +162,45 @@ line-height: 1.6;
 }
 
 .game-column {
+  display: grid;
+  grid-template-columns: 450px 1050px;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  left: 0;
+  margin-left: 0;
+  top: 15px;
+  position: absolute;
+}
+
+.responses-prompt {
+  width: 220px;
+  height: 120px;
+  border-radius: 10px;
+  background: #f9e8b1;
+    padding-right: 12px;
+
+  border: 1px solid #e5d398;
+  font-family: "Roboto Slab", serif;
+}
+
+.response-colomn {
+    display: grid;
+  grid-template-rows: repeat(4, 120px);
+  grid-template-columns:repeat(2, 220px);
+  
+line-height: 20px;
+
+grid-auto-flow: column;
+  grid-column: 1;
+}
+
+.response-text {
+  grid-auto-flow: column;
+  grid-column: 2;
+}
+
+.response-div {
   display: grid;
   grid-template-columns: 450px 1050px;
   gap: 16px;

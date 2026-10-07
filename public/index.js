@@ -1,6 +1,5 @@
 // main program js //////////////////////////////
 const btn = document.querySelector(".start-button");
-const start = document.querySelector(".start");
 let currGenre = document.getElementById("genre-select");
 const main = document.querySelector(".main");
 let inputBox;
@@ -9,7 +8,6 @@ let time;
 let timeDisplay;
 let column;
 let inputMap = new Map();
-
 
 ////////////////////////
 ////////Current progress
@@ -24,7 +22,6 @@ let inputMap = new Map();
 //        improve ui
 
 // note: each round is 1 second each for testing, move back to regular by changing line 83 back to time * 60
-
 
 const horrorPrompts = [
   "A family inherits a manor haunted by its former residents.",
@@ -80,7 +77,7 @@ function countDown(time) {
   inputBox = document.querySelector(".input");
 
   return new Promise((resolve) => {
-    let timeLeft = time * 60;
+    let timeLeft = time; //* 60;
     updateTime(timeLeft); // show starting time immediately
 
     const downloadTimer = setInterval(function () {
@@ -88,8 +85,6 @@ function countDown(time) {
       updateTime(timeLeft);
 
       if (timeLeft <= 0) {
-        console.log(inputBox.value);
-
         inputMap.set(recentPrompt, inputBox.value);
         clearInterval(downloadTimer);
         resolve();
@@ -146,34 +141,73 @@ function buildColumn() {
   return { column, prompt, timer };
 }
 
+let responsesDiv = document.createElement("div");
+responsesDiv.classList.add("response-div");
+
+const responseColomn = document.createElement("p");
+responseColomn.classList.add("response-colomn");
 function buildRecentResponses() {
-  const responsesDiv = document.createElement("div");
-  const prompt = document.createElement("p");
+  // remove existing panel if present
+  document.getElementById("recent-responses")?.remove();
 
-  prompt.classList.add("prompt");
-  responsesDiv.classList.add("game-column");
+  responsesDiv.id = "recent-responses";
+  const heading = document.createElement("p");
+  heading.textContent = "Recent responses";
+  responsesDiv.appendChild(heading);
 
-  prompt.textContent = inputMap;
+  // Actually render the inputMap prompt contents
+  for (const [promptT] of inputMap.entries()) {
+    const promptText = document.createElement("button");
 
-  responsesDiv.append(prompt);
-  return { column, prompt, timer };
+    promptText.classList.add("responses-prompt");
+    promptText.textContent = promptT;
+    responseColomn.appendChild(promptText);
+
+    responsesDiv.appendChild(responseColomn);
+  }
+
+  main.appendChild(responsesDiv);
 }
 
+// messy and insecure change when ossible
+const promptBtns = document.getElementsByClassName("responses-prompt");
+const responseText = document.createElement("p");
+responseText.classList.add("response-text");
+
+responsesDiv.addEventListener("click", async (e) => {
+      e.stopPropagation();
+
+  const targetElement = e.target.closest(".responses-prompt");
+  responseText.textContent = "";
+  console.log(targetElement);
+
+  let a = inputMap.get(targetElement.textContent);
+  responseText.textContent = a;
+  responsesDiv.appendChild(responseText);
+});
+
 const responsesBtn = document.getElementById("responses-btn");
+responsesBtn.addEventListener("click", async (e) => {
+  toggleStartScreen();
+  e.stopPropagation();
 
+  buildRecentResponses();
+});
 
-btn.addEventListener("click", async () => {
-      inputMap.clear();
+const start = document.querySelector(".start");
+start.addEventListener("click", async () => {
+  console.log("start clicked");
+  inputMap.clear();
 
-  time = parseInt(document.getElementById("time-select").value); // moved down, was being set to default on load
+  time = parseInt(document.getElementById("time-select").value);
   rounds = parseInt(document.getElementById("rounds-select").value);
   toggleStartScreen();
 
-  usedPromptInd = []; // reset per game
+  usedPromptInd = [];
 
   for (let i = 0; i < rounds; i++) {
     const { column, prompt, timer } = buildColumn();
-    timeDisplay = timer; // countDown writes to this
+    timeDisplay = timer;
     main.appendChild(column);
     getRandomPrompt(currGenre.value, prompt);
 
@@ -181,15 +215,7 @@ btn.addEventListener("click", async () => {
     main.removeChild(column);
   }
 
-  // display "view recent responses" tab
-  buildRecentResponses();
-
-  toggleStartScreen();
-});
-
-
-
-responsesBtn.addEventListener("click", async () => {
+  console.log(inputMap);
 
   toggleStartScreen();
 });
