@@ -76,7 +76,7 @@ function countDown(time) {
   inputBox = document.querySelector(".input");
 
   return new Promise((resolve) => {
-    let timeLeft = time * 60;
+    let timeLeft = time; //* 60;
     updateTime(timeLeft); // show starting time immediately
 
     const downloadTimer = setInterval(function () {

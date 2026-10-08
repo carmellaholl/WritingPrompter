@@ -2,8 +2,9 @@
   "name": "writingprompter",
   "version": "1.0.0",
   "description": "Randomly generates a writing prompt, then allowing the user a finite amount of time to complete it.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

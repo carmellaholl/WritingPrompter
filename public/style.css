@@ -198,17 +198,19 @@ body {
 .responses-text-view-column {
   display: grid;
   column-gap: 10px;
-  padding-left: 12px;
-  padding-bottom: 12px;
+    padding-left: 15px;
+
+  padding-bottom: 20px;
   line-height: 20px;
   grid-auto-flow: column;
   grid-column: 2;
   text-align: left;
   justify-self: center;
+  overflow: wrap;
 }
 
 .response-text {
-  grid-auto-flow: column;
+  grid-auto-flow: row;
   grid-column: 2;
 }
 
@@ -231,7 +233,7 @@ text-align: center;
 
 .response-div {
   display: grid;
-  grid-template-columns: 450px 1050px;
+  grid-template-columns: 35% 62%;
   gap: 16px;
   width: 100%;
   box-sizing: border-box;
