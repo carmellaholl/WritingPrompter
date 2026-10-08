@@ -4,9 +4,7 @@ html,
 body {
   margin: 0;
   min-height: 100vh;
-  /* background: #c70039; */
   background: #4caf50;
-
   font-family: "Roboto Slab", serif;
 }
 
@@ -182,6 +180,12 @@ body {
   font-family: "Roboto Slab", serif;
 }
 
+.recent-responses-prompt-btn.active {
+    background-color: #ff921a;
+      border: 1px solid #ff783eca;
+
+}
+
 .responses-prompt-select-column {
   display: grid;
   grid-template-rows: repeat(4, 120px);
@@ -198,8 +202,7 @@ body {
 .responses-text-view-column {
   display: grid;
   column-gap: 10px;
-    padding-left: 15px;
-
+  padding-left: 15px;
   padding-bottom: 20px;
   line-height: 20px;
   grid-auto-flow: column;
@@ -217,8 +220,8 @@ body {
 .no-responses-text {
   grid-auto-flow: column;
   grid-column: 1;
-    font-size: 20px;
-text-align: center;
+  font-size: 20px;
+  text-align: center;
   justify-self: center;
 }
 
@@ -227,8 +230,7 @@ text-align: center;
   justify-self: center;
   height: 15px;
   font-size: 20px;
-    grid-column: 1;
-
+  grid-column: 1;
 }
 
 .response-div {

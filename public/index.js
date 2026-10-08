@@ -88,7 +88,7 @@ function countDown(time) {
         clearInterval(downloadTimer);
         resolve();
       }
-    }, 1000);
+    }, 1000); 
   });
 }
 
@@ -185,9 +185,9 @@ function buildRecentResponses() {
     responsesPromptSelectColumn.appendChild(promptButton);
   }
 
-  /*
-   * If there are no saved prompts, display a default message.
-   */
+  
+   // If there are no saved prompts, display a default message.
+   
   if (inputMap.size === 0) {
     const noResponsesText = document.createElement("p");
 
@@ -207,11 +207,19 @@ responsesDiv.addEventListener("click", (e) => {
   e.stopPropagation();
 
   const promptButton = e.target.closest(".recent-responses-prompt-btn");
-
   // ignore clicks that were not on a prompt button.
   if (!promptButton) {
     return;
   }
+
+  document
+        .querySelectorAll(".recent-responses-prompt-btn")
+        .forEach((button) => {
+            button.classList.remove("active");
+        });
+
+    // Add active style to the clicked button.
+    promptButton.classList.add("active");
 
   const prompt = promptButton.textContent;
   const response = inputMap.get(prompt);
@@ -228,6 +236,7 @@ responsesDiv.addEventListener("click", (e) => {
   // display the saved response.
   responseText.textContent = response;
 });
+
 
 const responsesBtn = document.getElementById("responses-btn");
 responsesBtn.addEventListener("click", async (e) => {
