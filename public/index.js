@@ -58,7 +58,7 @@ const scifiPrompts = [
   "Four friends go to a local film festival and somehow become trapped inside one of the films",
   "Write about a society where people make clones of their loved ones before they die, ensuring no one has to experience permanent loss.",
   "Write about a zoo on a distant planet, populated with genetically engineered creatures from across the galaxy.",
-  "Write about a network of interconnected space stations and habitats forming an archipelago, each station a microcosm of culture and technology with its own laws and customs.",
+  "Write about a network of interconnected space stations and habitats forming an archipelago.",
   "A search and rescue mission leads to the discovery of an alien colony hidden in the Alaskan wilderness.",
 ];
 
