@@ -9,11 +9,6 @@ let timeDisplay;
 let column;
 let inputMap = new Map();
 
-////////////////////////
-////////Current progress
-////////////// Have the responses page interaction functioning
-// inputMap resets every time "Begin is pressed
-
 // to do: create contents of Responses page
 //            should be able to go through inputMap and output all prompts and given responses
 //            ui undecided
@@ -30,6 +25,10 @@ const horrorPrompts = [
   "A group of friends stay in a haunted cabin",
   "A group of teachers must band together to remove the curse placed on the school before it is too late.",
   "A group of hikers are being chased by a masked killer with unknown intentions",
+  "A bet turns into an unforgettable experience",
+  "A mirror in an antique shop shows the reflections of ghosts.",
+  "A person buys a seemingly innocuous object at a yard sale, only to discover it's haunted.",
+  "Tourists encounter a ghostly tour guide who leads them to mysterious and strange places.",
 ];
 const romancePrompts = [
   "A cafe meet-cute",
@@ -77,7 +76,7 @@ function countDown(time) {
   inputBox = document.querySelector(".input");
 
   return new Promise((resolve) => {
-    let timeLeft = time; //* 60;
+    let timeLeft = time * 60;
     updateTime(timeLeft); // show starting time immediately
 
     const downloadTimer = setInterval(function () {
@@ -141,54 +140,93 @@ function buildColumn() {
   return { column, prompt, timer };
 }
 
-let responsesDiv = document.createElement("div");
-responsesDiv.classList.add("response-div");
+let responsesDiv;
+let responseText;
+let responsesPromptSelectColumn;
+let responsesViewTextColumn;
 
-// spread operator
-const responseColomn = document.createElement("p");
-responseColomn.classList.add("response-colomn");
+// create "recent responses" panel
+responsesDiv = document.createElement("div");
+responsesDiv.classList.add("response-div");
+responsesDiv.id = "recent-responses";
+
+// column consisting list of prompts
+responsesPromptSelectColumn = document.createElement("div");
+responsesPromptSelectColumn.classList.add("responses-prompt-select-column");
+
+// column containing response for selected prompt
+responsesViewTextColumn = document.createElement("div");
+responsesViewTextColumn.classList.add("responses-text-view-column");
+
+const promptBtns = document.getElementsByClassName(
+  "recent-responses-prompt-btn",
+);
+responseText = document.createElement("p");
+responseText.classList.add("response-text");
+
+responsesViewTextColumn.appendChild(responseText);
+
 function buildRecentResponses() {
-  // remove existing panel if present
+  // remove the existing panel before rebuilding it.
   document.getElementById("recent-responses")?.remove();
 
-  responsesDiv.id = "recent-responses";
   const heading = document.createElement("p");
   heading.textContent = "Recent responses";
-      responseColomn.appendChild(heading);
-
-    heading.classList.add("response-heading");
+  heading.classList.add("response-heading");
 
   responsesDiv.appendChild(heading);
+  heading.classList.add("response-heading");
 
-  // Actually render the inputMap prompt contents
-  for (const [promptT] of inputMap.entries()) {
-    const promptText = document.createElement("button");
-
-    promptText.classList.add("responses-prompt");
-    promptText.textContent = promptT;
-    responseColomn.appendChild(promptText);
-
-    responsesDiv.appendChild(responseColomn);
+  // render the inputMap prompt contents
+  for (const [prompt] of inputMap.entries()) {
+    const promptButton = document.createElement("button");
+    promptButton.classList.add("recent-responses-prompt-btn");
+    promptButton.textContent = prompt;
+    responsesPromptSelectColumn.appendChild(promptButton);
   }
 
+  /*
+   * If there are no saved prompts, display a default message.
+   */
+  if (inputMap.size === 0) {
+    const noResponsesText = document.createElement("p");
+
+    noResponsesText.textContent = "No recent responses";
+    noResponsesText.classList.add("no-responses-text");
+
+    responsesPromptSelectColumn.appendChild(noResponsesText);
+  }
+
+  // Add both columns to the panel.
+  responsesDiv.appendChild(responsesPromptSelectColumn);
+  responsesDiv.appendChild(responsesViewTextColumn);
   main.appendChild(responsesDiv);
 }
 
-// messy and insecure change when ossible
-const promptBtns = document.getElementsByClassName("responses-prompt");
-const responseText = document.createElement("p");
-responseText.classList.add("response-text");
+responsesDiv.addEventListener("click", (e) => {
+  e.stopPropagation();
 
-responsesDiv.addEventListener("click", async (e) => {
-      e.stopPropagation();
+  const promptButton = e.target.closest(".recent-responses-prompt-btn");
 
-  const targetElement = e.target.closest(".responses-prompt");
+  // ignore clicks that were not on a prompt button.
+  if (!promptButton) {
+    return;
+  }
+
+  const prompt = promptButton.textContent;
+  const response = inputMap.get(prompt);
+
+  // clear the previously displayed response.
   responseText.textContent = "";
-  console.log(targetElement);
 
-  let a = inputMap.get(targetElement.textContent);
-  responseText.textContent = a;
-  responsesDiv.appendChild(responseText);
+  // display a default message when no response was provided.
+  if (!response || response.length === 0) {
+    responseText.textContent = "No response provided";
+    return;
+  }
+
+  // display the saved response.
+  responseText.textContent = response;
 });
 
 const responsesBtn = document.getElementById("responses-btn");
@@ -200,7 +238,9 @@ responsesBtn.addEventListener("click", async (e) => {
 });
 
 const start = document.querySelector(".start");
-start.addEventListener("click", async () => {
+const startBtn = document.querySelector(".start-button");
+
+startBtn.addEventListener("click", async () => {
   console.log("start clicked");
   inputMap.clear();
 

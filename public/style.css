@@ -173,17 +173,16 @@ body {
   position: absolute;
 }
 
-.responses-prompt {
+.recent-responses-prompt-btn {
   width: 220px;
   height: 120px;
   border-radius: 10px;
   background: #f9e8b1;
-
   border: 1px solid #e5d398;
   font-family: "Roboto Slab", serif;
 }
 
-.response-colomn {
+.responses-prompt-select-column {
   display: grid;
   grid-template-rows: repeat(4, 120px);
   grid-template-columns: repeat(2, 220px);
@@ -191,11 +190,21 @@ body {
   row-gap: 10px;
   padding-left: 12px;
   padding-bottom: 12px;
-
   line-height: 20px;
-
   grid-auto-flow: column;
   grid-column: 1;
+}
+
+.responses-text-view-column {
+  display: grid;
+  column-gap: 10px;
+  padding-left: 12px;
+  padding-bottom: 12px;
+  line-height: 20px;
+  grid-auto-flow: column;
+  grid-column: 2;
+  text-align: left;
+  justify-self: center;
 }
 
 .response-text {
@@ -203,8 +212,21 @@ body {
   grid-column: 2;
 }
 
+.no-responses-text {
+  grid-auto-flow: column;
+  grid-column: 1;
+    font-size: 20px;
+text-align: center;
+  justify-self: center;
+}
+
 .response-heading {
-    height:15px;
+  text-align: center;
+  justify-self: center;
+  height: 15px;
+  font-size: 20px;
+    grid-column: 1;
+
 }
 
 .response-div {
@@ -215,7 +237,6 @@ body {
   box-sizing: border-box;
   left: 0;
   margin-left: 0;
-  
   top: 0px;
   position: absolute;
 }
